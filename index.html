@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plate Stack Rush</title>
+  <meta name="description" content="Stack food plates (LIFO) and serve hungry customers before they lose patience.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game">
+    <h1>🍽️ Plate Stack Rush</h1>
+
+    <header class="hud">
+      <div class="pill">⭐ <span id="score">0</span></div>
+      <div class="pill">🏆 <span id="best">0</span></div>
+      <div class="pill" id="hearts">❤️❤️❤️</div>
+      <div class="pill">📚 <span id="size">0</span>/<span id="max">4</span></div>
+      <div class="pill">🔥 x<span id="combo">0</span></div>
+      <button id="mute" class="pill mute" aria-label="Toggle sound">🔊</button>
+    </header>
+
+    <section class="stage">
+      <div class="zone incoming-zone">
+        <h2>Next plate</h2>
+        <div class="conveyor"><div id="incoming" class="slot"></div></div>
+      </div>
+
+      <div class="zone stack-zone" id="stackZone">
+        <div id="stack" class="stack"></div>
+        <div class="table"></div>
+        <div class="stack-array">
+          <small>stack array (top = last)</small>
+          <ol id="stack-array-list"></ol>
+        </div>
+      </div>
+
+      <div class="zone customer-zone" id="customer">
+        <div class="bubble">
+          <small>I want</small>
+          <div id="order" class="order"></div>
+          <span id="order-name">—</span>
+        </div>
+        <div id="face" class="face">😋</div>
+        <div class="patience"><div id="bar"></div></div>
+      </div>
+    </section>
+
+    <div id="message" class="message">Plates stack automatically — serve the top ones to reach the requested food!</div>
+
+    <footer class="controls">
+      <button id="push" class="btn push">⬇ PUSH <small>Space</small></button>
+      <button id="pop" class="btn pop">⬆ SERVE <small>Enter</small></button>
+      <button id="remove" class="btn remove">↩ REMOVE TOP <small>R</small></button>
+      <button id="trash" class="btn trash">🗑 TOSS <small>T</small></button>
+    </footer>
+  </main>
+
+  <div id="start-overlay" class="overlay">
+    <div class="card">
+      <h2>🍽️ Plate Stack Rush</h2>
+      <p class="lead">Plates of food stack up automatically. Customers ask for a <b>random plate in your stack</b> — serve the top plates to reach it!</p>
+      <ul class="howto">
+        <li><b>⬇ PUSH</b> adds the next plate (auto-stacks up to 4).</li>
+        <li><b>⬆ SERVE</b> hands out the <b>top plate only</b>. Match the order to score.</li>
+        <li><b>↩ REMOVE TOP</b> pops the top plate without serving (great for digging down).</li>
+        <li><b>🗑 TOSS</b> throws the next plate away (customer loses patience).</li>
+        <li>Wrong plate or too slow = lose a ❤️.</li>
+      </ul>
+      <p class="lifo">📚 A stack is <b>LIFO</b>: the last plate pushed is the first one you can remove.</p>
+      <button id="start-btn" class="btn push big">▶ Start Game</button>
+    </div>
+  </div>
+
+  <div id="over-overlay" class="overlay hidden">
+    <div class="card">
+      <h2>💥 Game Over!</h2>
+      <p id="over-text" class="lead"></p>
+      <button id="again-btn" class="btn pop big">🔁 Play Again</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
