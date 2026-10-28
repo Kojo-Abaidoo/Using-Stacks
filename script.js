@@ -217,16 +217,19 @@
     incomingEl.appendChild(p);
   }
 
-  function newOrder() {
-    // Randomize from the plates CURRENTLY IN THE STACK.
-    // If stack is empty, fall back to incoming so the player has a goal.
+    function newOrder() {
+    // Pick from the TOP 2 plates only (so it's always winnable)
     if (stack.size === 0) {
       order = incoming;
     } else {
       const items = stack.all();
-      order = items[Math.floor(Math.random() * items.length)];
+      // Get the top 2 plates (or fewer if the stack is small)
+      const topPlates = items.slice(-2); 
+      order = topPlates[Math.floor(Math.random() * topPlates.length)];
     }
-    patienceMax = Math.max(3.5, 6 - served * 0.2);  // <-- shorter, faster-dropping
+    
+    // Give the player a bit more breathing room
+    patienceMax = Math.max(4.5, 8 - served * 0.2); 
     patience = patienceMax;
 
     orderEl.innerHTML = "";
